@@ -1,15 +1,24 @@
 import React from "react";
 
-function House(color: string, player: string) {
+import styles from "@/app/styles/house.module.css"
+
+interface HouseProps {
+  color: string;
+  player: string;
+}
+
+function House({ color, player }: HouseProps) {
   return (
     <div
-      className={`${color} house`}
+      className={`${styles[color]} ${styles.house}`}
       id={player}
     >
-      <div className={`token-square token-1 token-${color}`}></div>
-      <div className={`token-square token-2 token-${color}`}></div>
-      <div className={`token-square token-3 token-${color}`}></div>
-      <div className={`token-square token-4 token-${color}`}></div>
+      <div className={styles.box}>
+        <div className={`${styles.tokenBox} ${styles[color]}`}></div>
+        <div className={`${styles.tokenBox} ${styles[color]}`}></div>
+        <div className={`${styles.tokenBox} ${styles[color]}`}></div>
+        <div className={`${styles.tokenBox} ${styles[color]}`}></div>
+      </div>
     </div>
   );
 }
