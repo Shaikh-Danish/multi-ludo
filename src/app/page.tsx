@@ -1,4 +1,5 @@
 import House from "@/app/components/House"
+import Cells from "./components/Cells"
 
 export default function Home() {
   return (
@@ -7,6 +8,8 @@ export default function Home() {
       <House color="red" player="player-2"/>
       <House color="blue" player="player-3"/>
       <House color="green" player="player-4"/>
+
+      <Cells></Cells>
     </main>
   )
 }
