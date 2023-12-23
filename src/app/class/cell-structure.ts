@@ -5,7 +5,6 @@ interface Cell {
 }
 
 export const cells: Cell[] = [
-  { safe: false },
   { safe: true, start: "yellow", break: "hor" },
   { safe: false },
   { safe: false },
@@ -57,4 +56,5 @@ export const cells: Cell[] = [
   { safe: false },
   { safe: false },
   { safe: false, break: "hor" },
+  { safe: false },
 ];

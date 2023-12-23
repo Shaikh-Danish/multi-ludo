@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useRef } from "react";
 
@@ -6,14 +6,28 @@ import { cells } from "../class/cell-structure";
 import styles from "@/app/styles/Cell.module.css";
 
 function Cell() {
-  const startCol = useRef(1)
-  const startRow = useRef(6)
+  const col = useRef<number>(2);
+  const row = useRef<number>(6);
+
+  const brek = useRef<string>("hor");
 
   return (
     <div>
-      {cells.map((cell, i) => (
-        <div key={i} className={styles.cell}></div>
-      ))}
+      {cells.map((cell, i) => {
+        if (cell.break === "hor" || brek.current === "hor") {
+          brek.current = "hor";
+        } else if (cell.break === "ver" || brek.current === "ver") {
+          brek.current = "ver";
+        }
+
+        return (
+          <div
+            key={i}
+            className={styles.cell}
+            style={{ gridColumn: col.current }}
+          ></div>
+        );
+      })}
     </div>
   );
 }
