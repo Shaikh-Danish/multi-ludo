@@ -1,17 +1,10 @@
 .house {
-  /* position: absolute; */
-  /* grid-template-columns: repeat(6, 100px);
-  grid-template-rows: repeat(6, 80px); */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
-  height: 200px;
 }
 
 .house:first-child {
-  top: 0;
-  left: 0;
   grid-column-start: 1;
   grid-column-end: 6;
   grid-row-start: 1;
@@ -19,29 +12,23 @@
 }
 
 .house:nth-child(2) {
-  top: 0;
-  right: 0;
-  grid-column-start: 10;
+  grid-column-start: 11;
   grid-column-end: 16;
   grid-row-start: 1;
   grid-row-end: 6;
 }
 
 .house:nth-child(3) {
-  bottom: 0;
-  left: 0;
   grid-column-start: 1;
   grid-column-end: 6;
-  grid-row-start: 10;
+  grid-row-start: 11;
   grid-row-end: 16;
 }
 
 .house:nth-child(4) {
-  bottom: 0;
-  right: 0;
-  grid-column-start: 10;
+  grid-column-start: 11;
   grid-column-end: 16;
-  grid-row-start: 10;
+  grid-row-start: 11;
   grid-row-end: 16;
 }
 
