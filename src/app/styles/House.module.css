@@ -6,29 +6,29 @@
 
 .house:first-child {
   grid-column-start: 1;
-  grid-column-end: 6;
+  grid-column-end: 7;
   grid-row-start: 1;
-  grid-row-end: 6;
+  grid-row-end: 7;
 }
 
 .house:nth-child(2) {
-  grid-column-start: 11;
+  grid-column-start: 10;
   grid-column-end: 16;
   grid-row-start: 1;
-  grid-row-end: 6;
+  grid-row-end: 7;
 }
 
 .house:nth-child(3) {
   grid-column-start: 1;
-  grid-column-end: 6;
-  grid-row-start: 11;
-  grid-row-end: 16;
+  grid-column-end: 7;
+  grid-row-start: 10;
+  grid-row-end: 17;
 }
 
 .house:nth-child(4) {
-  grid-column-start: 11;
+  grid-column-start: 10;
   grid-column-end: 16;
-  grid-row-start: 11;
+  grid-row-start: 10;
   grid-row-end: 16;
 }
 

@@ -1,5 +1,7 @@
+"use client"
+
 import House from "@/app/components/House"
-import Cells from "./components/Cells"
+import Cells from "@/app/components/Cells"
 
 export default function Home() {
   return (
@@ -9,7 +11,7 @@ export default function Home() {
       <House color="blue" player="player-3"/>
       <House color="green" player="player-4"/>
 
-      <Cells></Cells>
+      <Cells />
     </main>
   )
 }
