@@ -56,8 +56,8 @@ body {
 
 main {
   display: grid;
-  grid-template-columns: repeat(15, 45px);
-  grid-template-rows: repeat(15, 40px);
+  grid-template-columns: repeat(15, 52px);
+  grid-template-rows: repeat(15, 45px);
   /* position: relative; */
   /* max-width: 550px; */
   /* width: 100%;
