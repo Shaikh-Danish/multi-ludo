@@ -8,6 +8,12 @@ export interface CellType {
   entry?: string;
 }
 
+export interface HomeType {
+  col: [number, number];
+  row: [number, number];
+  color: string;
+}
+
 export const cells: CellType[] = [
   { safe: true, start: "yellow", break: "hr", col: 2, row: 7 },
   { safe: false, col: 3, row: 7 },
@@ -62,3 +68,10 @@ export const cells: CellType[] = [
   { safe: false, break: "hr", entry: "yellow", col: 1, row: 8, cells: [{ start: "yellow", row: 8, col: 2 }, { start: "yellow", row: 8, col: 3 }, {start: "yellow", row: 8, col: 4 }, {start: "yellow", row: 8, col: 5 }, {start: "yellow", row: 8, col: 6 }] },
   { safe: false, col: 1, row: 7 },
 ];
+
+export const homes: HomeType[] = [
+  { row: [7, 9], col: [7, 8], color: "yellow" },
+  { row: [7, 8], col: [7, 9], color: "red" },
+  { row: [7, 9], col: [9, 8], color: "green" },
+  { row: [9, 8], col: [7, 9], color: "blue" },
+]
