@@ -1,9 +1,29 @@
-    .triangle {
-      grid-column-start: 7;
-      grid-column-end: 9;
-      grid-row-start: 7;
-      grid-row-end: 8;
-      border-right: 78px solid transparent;
-      border-left: 78px solid transparent;
-      border-top: 65px solid #3498db;
-    }
+.player-yellow {
+	grid-column: ;
+	grid-row: ;
+	width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 86.6px solid #3498db;
+
+}
+.player-red {
+
+}
+.player-green {
+
+}
+.player-blue {
+
+}
+
+/*      { row: [7, 9], col: [7, 8], color: "yellow" },
+  { row: [7, 8], col: [7, 9], color: "red" },
+  { row: [7, 9], col: [9, 8], color: "green" },
+  { row: [9, 8], col: [7, 9], color: "blue" },
+
+            gridColumnStart: home.col[0],
+          gridColumnEnd: home.col[1],
+          gridRowStart: home.row[0],
+          gridRowEnd: home.row[1],*/
