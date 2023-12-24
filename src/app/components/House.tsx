@@ -6,15 +6,16 @@ import styles from "@/app/styles/House.module.css"
 interface HouseProps {
   color: string;
   player: string;
+  hlBorder: string;
 }
 
-function House({ color, player }: HouseProps) {
+function House({ color, player, hlBorder }: HouseProps) {
   return (
     <div
-      className={`${styles[color]} ${styles.house}`}
+      className={`${styles[color]} ${styles.house} ${styles[hlBorder]}`}
       id={player}
     >
-      <div className={styles.box}>
+      <div className={`${styles.box} ${styles[hlBorder]}`}>
         <div className={`${styles.tokenBox} ${styles[color]}`}>
           <TokenImage player={color}/>
         </div>
