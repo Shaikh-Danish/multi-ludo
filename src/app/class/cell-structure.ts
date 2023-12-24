@@ -8,10 +8,6 @@ export interface CellType {
   entry?: string;
 }
 
-export interface HomeType {
-  name: string,
-}
-
 export const cells: CellType[] = [
   { safe: true, start: "yellow", break: "hr", col: 2, row: 7 },
   { safe: false, col: 3, row: 7 },
@@ -67,9 +63,3 @@ export const cells: CellType[] = [
   { safe: false, col: 1, row: 7 },
 ];
 
-export const homes: HomeType[] = [
-  { name: "player-yellow" },
-  { name: "player-red" },
-  { name: "player-green" },
-  { name: "player-blue" },
-]
