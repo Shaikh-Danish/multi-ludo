@@ -3,27 +3,25 @@
 import React, { useState } from "react";
 
 import { cells } from "@/app/class/cell-structure";
+import Cell from "./Cell"
 import styles from "@/app/styles/Cells.module.css";
 
-function Cell() {
+function Cells() {
   return (
     <>
       {cells.map((cell, i) => {
-        return (
-          <div
-            key={i}
-            className={`${styles.cell} ${styles[cell.start]}`}
-            style={{
-              gridColumnStart: cell.col,
-              gridColumnEnd: cell.col,
-              gridRowStart: cell.row,
-              gridRowEnd: cell.row,
-            }}
-          ></div>
-        );
+        if (isBool(cell.entry)) {
+          return [<Cell cell={cell} key={i} />, cell.cells.map((cell, j) => <Cell cell={cell} key={j} />)]
+        }
+
+        return <Cell cell={cell} key={i} />
       })}
     </>
   );
 }
 
-export default Cell;
+function isBool(val: string): boolean {
+  return Boolean(val)
+}
+
+export default Cells;
