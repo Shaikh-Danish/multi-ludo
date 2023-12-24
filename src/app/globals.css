@@ -65,6 +65,9 @@ a {
 }
 
 .home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   grid-column: 7 / 10;
   grid-row: 7 / 10;
   border-bottom: 30px solid #29b6f6;

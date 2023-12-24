@@ -2,6 +2,7 @@
 
 import House from "@/app/components/House"
 import Cells from "@/app/components/Cells"
+import Dice from "@/app/components/Dice"
 
 export default function Home() {
   return (
@@ -11,7 +12,9 @@ export default function Home() {
       <House color="blue" player="player-3"/>
       <House color="green" player="player-4"/>
 
-      <div className="home"></div>
+      <div className="home">
+        <Dice />
+      </div>
 
       <Cells />
     </main>
