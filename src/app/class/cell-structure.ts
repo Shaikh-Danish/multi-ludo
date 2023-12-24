@@ -9,9 +9,7 @@ export interface CellType {
 }
 
 export interface HomeType {
-  col: [number, number];
-  row: [number, number];
-  color: string;
+  name: string,
 }
 
 export const cells: CellType[] = [
@@ -70,8 +68,8 @@ export const cells: CellType[] = [
 ];
 
 export const homes: HomeType[] = [
-  { row: [7, 9], col: [7, 8], color: "yellow" },
-  { row: [7, 8], col: [7, 9], color: "red" },
-  { row: [7, 9], col: [9, 8], color: "green" },
-  { row: [9, 8], col: [7, 9], color: "blue" },
+  { name: "player-yellow" },
+  { name: "player-red" },
+  { name: "player-green" },
+  { name: "player-blue" },
 ]
