@@ -12,13 +12,12 @@ function Cell() {
         return (
           <div
             key={i}
-            className={styles.cell}
+            className={`${styles.cell} ${styles[cell.start]}`}
             style={{
               gridColumnStart: cell.col,
               gridColumnEnd: cell.col,
               gridRowStart: cell.row,
               gridRowEnd: cell.row,
-              backgroundColor: cell.start ?? "white",
             }}
           ></div>
         );
