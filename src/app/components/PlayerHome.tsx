@@ -10,7 +10,7 @@ function PlayerHome() {
   return (
     <>
     {
-      homes.map((home, i) => <div></div>)
+      homes.map((home, i) => <div className={styles[home.name]}></div>)
     }
     </>
   )
