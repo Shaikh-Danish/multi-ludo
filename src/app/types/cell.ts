@@ -6,4 +6,9 @@ export interface CellType {
   row: number;
   cells?: Cell[];
   entry?: string;
+  tokens?: [Token];
+}
+
+interface Token {
+  pid: string;
 }

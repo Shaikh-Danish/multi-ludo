@@ -71,3 +71,12 @@
 .hlBorder {
   border: 2px solid black;
 }
+
+.hl {
+  opacity: .5;
+  background-color: gray;
+}
+
+.pointer {
+  cursor: pointer;
+}

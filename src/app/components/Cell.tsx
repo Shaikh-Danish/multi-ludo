@@ -2,10 +2,14 @@
 
 import React from "react";
 
-import { CellType } from "@/app/class/cell-structure";
+import Token from "./Token"
+import { useTokenContext } from "@/app/context"
+import { CellType } from "@/app/class/structure";
 import styles from "@/app/styles/Cells.module.css";
 
-function Cell({ cell }: CellProps) {
+function Cell({ cell }: CellType) {
+	// console.log(cell);
+	const { tokens, setTokens } = useTokenContext()
 	return (
 	    <div
 	      className={`${styles.cell} ${styles[cell.start]}`}
@@ -15,7 +19,13 @@ function Cell({ cell }: CellProps) {
 	        gridRowStart: cell.row,
 	        gridRowEnd: cell.row,
 	      }}
-	    ></div>
+	    >
+				{
+					cell.tokens &&
+					cell.tokens.map(token => <Token token={tokens[token.pid]} playerId={token.pid} color={token.color}/>)
+				}
+
+			</div>
 	);
 }
 

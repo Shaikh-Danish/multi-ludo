@@ -1,42 +1,25 @@
-import React from "react";
-import Image from "next/image"
+import React, { useContext } from "react";
 
 import styles from "@/app/styles/House.module.css"
+import TokenHouse from "./TokenHouse"
+import { Player } from "@/app/types"
 
 interface HouseProps {
-  color: string;
-  player: string;
-  hlBorder: string;
+  player: Player;
+  isTurn: boolean;
+  token: any;
 }
 
-function House({ color, player, hlBorder }: HouseProps) {
+function House({player, isTurn, token }: HouseProps) {
   return (
     <div
-      className={`${styles[color]} ${styles.house} ${styles[hlBorder]}`}
-      id={player}
+      className={`${styles[player.color]} ${styles.house} ${isTurn && styles.hlBorder}`}
     >
-      <div className={`${styles.box} ${styles[hlBorder]}`}>
-        <div className={`${styles.tokenBox} ${styles[color]}`}>
-          <TokenImage player={color}/>
-        </div>
-        <div className={`${styles.tokenBox} ${styles[color]}`}>
-          <TokenImage player={color}/>
-        </div>
-        <div className={`${styles.tokenBox} ${styles[color]}`}>
-          <TokenImage player={color}/>
-        </div>
-        <div className={`${styles.tokenBox} ${styles[color]}`}>
-          <TokenImage player={color}/>
-        </div>
+      <div className={`${styles.box} ${isTurn && styles.hlBorder}`}>
+        {token.map(t => <TokenHouse token={t} color={player.color} playerId={player.id} />)}
       </div>
     </div>
   );
-}
-
-function TokenImage({ player }: { player: string }) {
-  return (
-      <Image src={`/token-${player}.png`} width={40} height={40} />
-  )
 }
 
 export default House;

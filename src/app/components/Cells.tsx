@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 
-import { cells } from "@/app/class/cell-structure";
 import Cell from "./Cell"
+import { CellType } from "@/app/types"
 import styles from "@/app/styles/Cells.module.css";
 
-function Cells() {
+function Cells({ cells }: CellType[]) {
   return (
     <>
       {cells.map((cell, i) => {
