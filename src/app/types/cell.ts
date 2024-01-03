@@ -1,6 +1,5 @@
 export interface CellType {
   safe?: boolean;
-  break?: string;
   start?: string;
   col: number;
   row: number;
@@ -11,4 +10,9 @@ export interface CellType {
 
 interface Token {
   pid: string;
+  tid: string;
+  color: string;
+  inHouse: boolean;
+  isHl: boolean;
+  home: boolean;
 }

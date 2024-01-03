@@ -1,35 +1,39 @@
 import React, { useState } from "react"
 
 import styles from "@/app/styles/Dice.module.css"
-
-import { useTurnContext, useTokenContext } from "@/app/context"
+import { getNextPlayer, unHighlightTokens } from "@/app/utils/util"
+import { useTurnContext, useTokenContext, useDiceDisabledContext } from "@/app/context"
 
 function Dice() {
-	const [diceNumber, setDiceNumber] = useState<number>(1)
-	const [disabled, setDisabled] = useState<boolean>(false)
+	const { disabled, setDisabled } = useDiceDisabledContext()
 	const { turn, setTurn } = useTurnContext()
 	const { tokens, setTokens } = useTokenContext()
+
+	const [diceNumber, setDiceNumber] = useState<number>(1)
 
 	const rollDice = (): void => {
 		const roll = Math.floor(Math.random() * 6) + 1;
 		setDiceNumber(roll)
 
 		const playerTokens = tokens[turn]
-
-		const isAllInHouse = isAllTokensInHouse(playerTokens)
+		const isAllInHouse = isAllTokensInHouse(playerTokens.tokens)
 
 		if (isAllInHouse) {
 			if (roll === 6) {
-				const hlTokens = highlightPlayerTokens(playerTokens)
+				const hlTokens = highlightPlayerTokens(playerTokens.tokens, roll)
+
 				setDisabled(true)
-
-				setTokens({ ...tokens, [turn]: hlTokens })
+				setTokens({ ...tokens, [turn]: { color: playerTokens.color, pid: playerTokens.pid, tokens: hlTokens } })
 			} else {
-				const unHlTokens = unHighlightTokens(tokens)
-
-				setTokens(unHlTokens)
+				unHighlightTokens(tokens, roll)
+				setTokens(tokens)
 				setTurn(getNextPlayer(turn))
 			}
+		} else {
+			const hlTokens = highlightPlayerTokens(playerTokens.tokens, roll)
+
+			setDisabled(true)
+			setTokens({ ...tokens, [turn]: { color: playerTokens.color, pid: playerTokens.pid, tokens: hlTokens } })
 		}
 	}
 
@@ -44,23 +48,16 @@ function Dots() {
 	return <div className={styles.dot}></div>
 }
 
-function getNextPlayer(currentPlayer: string): string {
-	const totalPlayers = 4
-	return `p-${(Number(currentPlayer.split("-")[1]) % totalPlayers) + 1}`;
-}
+function highlightPlayerTokens(tokens, diceNumber: number) {
+	return tokens.map(token => {
+		if (diceNumber < 6 && !token.inHouse) {
+			return { ...token, isHl: true }
+		} else if (diceNumber === 6 && token.inHouse) {
+			return { ...token, isHl: true }
+		}
 
-function highlightPlayerTokens(tokens) {
-	return tokens.map(token => ({ ...token, isHl: true }))
-}
-
-function unHighlightTokens(tokens) {
-	const unHighlighted = {}
-
-	Object.entries(tokens).forEach(([pid,token]) => {
-		unHighlighted[pid] = token.map(t => ({ ...t, isHl: false}))
+		return token
 	})
-
-	return unHighlighted
 }
 
 function isAllTokensInHouse(tokens) {

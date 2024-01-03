@@ -3,26 +3,30 @@
 import React from "react";
 
 import Token from "./Token"
-import { useTokenContext } from "@/app/context"
-import { CellType } from "@/app/class/structure";
+
+import { CellType } from "@/app/types"
 import styles from "@/app/styles/Cells.module.css";
 
-function Cell({ cell }: CellType) {
-	// console.log(cell);
-	const { tokens, setTokens } = useTokenContext()
+function Cell({ cell, token }: { cell: CellType, token: any }) {
+
 	return (
 	    <div
 	      className={`${styles.cell} ${styles[cell.start]}`}
 	      style={{
-	        gridColumnStart: cell.col,
-	        gridColumnEnd: cell.col,
-	        gridRowStart: cell.row,
-	        gridRowEnd: cell.row,
+	        gridColumn: cell.col,
+	        gridRow: cell.row,
 	      }}
 	    >
 				{
-					cell.tokens &&
-					cell.tokens.map(token => <Token token={tokens[token.pid]} playerId={token.pid} color={token.color}/>)
+					token ? <Token token={token} playerId={token.pid} color={token.color} /> : ""
+					// cell.tokens &&
+					// cell.tokens.map(token => {
+					// 	return (
+					// 		<div>
+					// 			<Token token={token} playerId={token.pid} color={token.color} />
+					// 		</div>
+					// 	)
+					// })
 				}
 
 			</div>

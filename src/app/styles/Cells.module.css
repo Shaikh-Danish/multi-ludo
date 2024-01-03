@@ -2,6 +2,9 @@
   border-collapse: collapse;
   border: 1px solid #e5e5e569;
   background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .red {

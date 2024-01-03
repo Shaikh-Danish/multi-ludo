@@ -1,6 +1,7 @@
 import { useTurnContext, turnContext } from "./turnContext"
 import { useTokenContext, tokenContext } from "./tokenContext"
 import { useCellsContext, cellsContext } from "./cellsContext"
+import { useDiceDisabledContext, diceDisabledContext } from "./diceDisableContext"
 
 export {
   tokenContext,
@@ -8,5 +9,7 @@ export {
   turnContext,
   useTurnContext,
   cellsContext,
-  useCellsContext, 
+  useCellsContext,
+  diceDisabledContext,
+  useDiceDisabledContext
 }
