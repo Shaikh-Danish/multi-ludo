@@ -6,6 +6,7 @@ export interface CellType {
   cells?: Cell[];
   entry?: string;
   tokens?: [Token];
+  house?: boolean;
 }
 
 interface Token {
