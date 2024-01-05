@@ -1,7 +1,5 @@
 export function getNextPlayer(currentPlayer: string): string {
 	const totalPlayers = 4
-	console.log(`p-${(Number(currentPlayer.split("-")[1]) % totalPlayers) + 1}`);
-
 	return `p-${(Number(currentPlayer.split("-")[1]) % totalPlayers) + 1}`;
 }
 

@@ -2,14 +2,13 @@ import React, { useState } from "react"
 
 import styles from "@/app/styles/Dice.module.css"
 import { getNextPlayer, unHighlightTokens } from "@/app/utils/util"
-import { useTurnContext, useTokenContext, useDiceDisabledContext } from "@/app/context"
+import { useTurnContext, useTokenContext, useDiceDisabledContext, useDiceNumberContext } from "@/app/context"
 
 function Dice() {
 	const { disabled, setDisabled } = useDiceDisabledContext()
 	const { turn, setTurn } = useTurnContext()
 	const { tokens, setTokens } = useTokenContext()
-
-	const [diceNumber, setDiceNumber] = useState<number>(1)
+	const { diceNumber, setDiceNumber } = useDiceNumberContext()
 
 	const rollDice = (): void => {
 		const roll = Math.floor(Math.random() * 6) + 1;
@@ -50,7 +49,8 @@ function Dots() {
 
 function highlightPlayerTokens(tokens, diceNumber: number) {
 	return tokens.map(token => {
-		if (diceNumber < 6 && !token.inHouse) {
+
+		if (!token.inHouse) {
 			return { ...token, isHl: true }
 		} else if (diceNumber === 6 && token.inHouse) {
 			return { ...token, isHl: true }

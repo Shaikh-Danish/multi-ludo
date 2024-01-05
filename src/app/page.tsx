@@ -6,7 +6,7 @@ import House from "@/app/components/House"
 import Cells from "@/app/components/Cells"
 import Dice from "@/app/components/Dice"
 
-import { turnContext, tokenContext, cellsContext, diceDisabledContext } from "@/app/context"
+import { turnContext, tokenContext, cellsContext, diceDisabledContext, diceNumberContext } from "@/app/context"
 
 import { playerTokens, cellsObj } from "@/app/class/structure"
 import { Tokens, cellType } from "@/app/types"
@@ -18,6 +18,7 @@ export default function Home() {
   const [tokens, setTokens] = useState<Tokens[]>(playerTokens)
   const [cells, setCells] = useState<CellType[]>(cellsObj)
   const [disabled, setDisabled] = useState<boolean>(false)
+  const [diceNumber, setDiceNumber] = useState<number>(1)
 
   const playersArray = [1, 2, 4, 3]
 
@@ -26,20 +27,22 @@ export default function Home() {
       <tokenContext.Provider value={{ tokens, setTokens }}>
         <cellsContext.Provider value={{ cells, setCells }}>
           <diceDisabledContext.Provider value={{ disabled, setDisabled }}>
-            <main>
-              {
-                playersArray.map((p, i) => {
-                    const player = tokens[`p-${p}`]
-                    return <House key={player.pid} pid={player.pid} color={player.color} tokens={player.tokens} isTurn={player.pid === turn} />
-                })
-              }
+            <diceNumberContext.Provider value={{ diceNumber, setDiceNumber }}>
+              <main>
+                {
+                  playersArray.map((p, i) => {
+                      const player = tokens[`p-${p}`]
+                      return <House key={player.pid} pid={player.pid} color={player.color} tokens={player.tokens} isTurn={player.pid === turn} />
+                  })
+                }
 
-              <div className="home">
-                <Dice />
-              </div>
+                <div className="home">
+                  <Dice />
+                </div>
 
-              <Cells cells={cells} />
-            </main>
+                <Cells cells={cells} />
+              </main>
+            </diceNumberContext.Provider>
           </diceDisabledContext.Provider>
         </cellsContext.Provider>
       </tokenContext.Provider>
