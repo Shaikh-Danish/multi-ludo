@@ -68,11 +68,6 @@
   border: 2px solid black;
 }
 
-.hl {
-  opacity: .5;
-  background-color: gray;
-}
-
 .pointer {
   cursor: pointer;
 }
@@ -83,6 +78,7 @@
 
 .positionToken {
   position: absolute;
+  z-index: 2;
 }
 
 .positionToken:first-child {
@@ -93,4 +89,14 @@
 .positionToken:nth-child(2) {
   bottom: 3px;
   right: 5px;
+}
+
+.zIndex {
+  z-index: 80;
+}
+
+.hl {
+  /* opacity: .5; */
+  background-color: gray;
+  z-index: 100;
 }

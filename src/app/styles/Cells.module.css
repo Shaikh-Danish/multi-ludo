@@ -8,6 +8,11 @@
   position: relative;
 }
 
+.star {
+  position: absolute;
+  z-index: 0;
+}
+
 .red {
   background-color: #e53935;
 }

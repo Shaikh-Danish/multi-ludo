@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image"
 
 import Token from "./Token"
 
@@ -56,7 +57,10 @@ function Cell({ cell, token, isMultiple, children }: { children: any, cell: Cell
 	    >
 				{children}
 				{
-					token ? <Token token={token} playerId={token.pid} color={token.color} isMultiple={isMultiple} /> : ""
+					token && <Token token={token} playerId={token.pid} color={token.color} isMultiple={isMultiple} />
+				}
+				{
+					cell.safe && <Image src={`/star.png`} width={35} height={35} className={styles.star} />
 				}
 			</div>
 	);
