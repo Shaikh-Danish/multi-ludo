@@ -7,6 +7,7 @@ export interface CellType {
   entry?: string;
   tokens?: [Token];
   house?: boolean;
+  home?: string;
 }
 
 interface Token {
