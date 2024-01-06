@@ -1,8 +1,8 @@
 export interface CellType {
   safe?: boolean;
   start?: string;
-  col: number;
-  row: number;
+  col?: number;
+  row?: number;
   cells?: Cell[];
   entry?: string;
   tokens?: [Token];

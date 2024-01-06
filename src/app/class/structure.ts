@@ -89,21 +89,25 @@ export const cellsObj: CellType[] = [
   { start: "red", home: "red", row: 4, col: 8 },
   { start: "red", home: "red", row: 5, col: 8 },
   { start: "red", home: "red", row: 6, col: 8 },
+  { home: "red" },
   { start: "green", home: "green", row: 8, col: 14 },
   { start: "green", home: "green", row: 8, col: 13 },
   { start: "green", home: "green", row: 8, col: 12 },
   { start: "green", home: "green", row: 8, col: 11 },
   { start: "green", home: "green", row: 8, col: 10 },
+  { home: "green"  },
   { start: "blue", home: "blue", col: 8, row: 14 },
   { start: "blue", home: "blue", col: 8, row: 13 },
   { start: "blue", home: "blue", col: 8, row: 12 },
   { start: "blue", home: "blue", col: 8, row: 11 },
   { start: "blue", home: "blue", col: 8, row: 10 },
+  { home: "blue" },
   { start: "yellow", home: "yellow", row: 8, col: 2 },
   { start: "yellow", home: "yellow", row: 8, col: 3 },
   { start: "yellow", home: "yellow", row: 8, col: 4 },
   { start: "yellow", home: "yellow", row: 8, col: 5 },
-  { start: "yellow", home: "yellow", row: 8, col: 6 }
+  { start: "yellow", home: "yellow", row: 8, col: 6 },
+  { home: "yellow"  }
 ];
 
 export const playerTokens: Tokens = {

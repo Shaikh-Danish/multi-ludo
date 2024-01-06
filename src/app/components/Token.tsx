@@ -24,12 +24,14 @@ function Token({ color, token, playerId, isMultiple }: TokenProps) {
 	const move = (e) => {
 		if (token.isHl) {
 			const tokenId: number = Number(e.target.id)
+			const playerTokens = tokens[turn]
+
+			const token = findToken(playerTokens.tokens, tokenId)
 
 			if (token.inHouse) {
 				const cellIndex = cells.findIndex((cell) => findCell(cell, color))
 				const cell = cells[cellIndex]
 
-				const token = findToken(tokens[playerId].tokens, tokenId)
 				token.index = cellIndex
 
 				unHighlightTokens(tokens)
@@ -38,18 +40,48 @@ function Token({ color, token, playerId, isMultiple }: TokenProps) {
 				setTokens(tokens)
 				setDisabled(false)
 			} else {
-				const playerTokens = tokens[turn]
-				const tokenIndex: number = moveToken(tokens, turn, cells,  diceNumber, tokenId)
-				const cell = cells[tokenIndex]
+				if (token.home) {
+					const homeCells = []
+					cells.forEach((cell, i) => {
+						if (cell.home === playerTokens.color) homeCells.push([cell, i])
+					})
 
-				const token = otherTokensOnCell(tokens, cell, turn, tokenIndex)
-				unHighlightTokens(tokens)
+					const homeCellsCount = 5
+					const cellIndex = homeCells.findIndex(cell => cell[1] == token.index)
+					const [homeCell] = homeCells[cellIndex]
 
-				setTokens(tokens)
-				setDisabled(false)
+					if (diceNumber > homeCellsCount - cellIndex) {
+						// setDisabled(false)
+						// setTurn(getNextPlayer(turn))
+						return
+					}
 
-				if (diceNumber !== 6 && !token) {
+					if (cellIndex + diceNumber === homeCellsCount) {
+						removeToken(tokens, tokenId, turn)
+					}
+
+					console.log(homeCellsCount, cellIndex, homeCellsCount - cellIndex);
+
+					token.index += diceNumber
+
+					unHighlightTokens(tokens)
+					setTokens(tokens)
+					setDisabled(false)
+
 					setTurn(getNextPlayer(turn))
+				} else {
+					const tokenIndex: number = moveToken(tokens, turn, cells,  diceNumber, tokenId)
+					const cell = cells[tokenIndex]
+
+					const removedToken = otherTokensOnCell(tokens, cell, turn, tokenIndex)
+					unHighlightTokens(tokens)
+
+					setTokens(tokens)
+					setDisabled(false)
+
+					if (diceNumber !== 6 && !removedToken) {
+						setTurn(getNextPlayer(turn))
+					}
 				}
 			}
 		}
@@ -138,11 +170,22 @@ function findHomeCell(cells, token, color: string, diceNumber: number): any {
 			if (cell.home === color) homeCells.push([cell, index])
 		})
 
+		console.log(homeCells);
+
+		console.log(diceNumber);
+
 		return [...homeCells[diceNumber - 1]]
 	}
 
 	return []
+}
 
+function removeToken(tokens, tokenId, turn) {
+	tokens[turn].tokens.forEach((token, i) => {
+		if (token.id === tokenId) {
+			tokens[turn].tokens.splice(i, 1)
+		}
+	})
 }
 
 export default Token
