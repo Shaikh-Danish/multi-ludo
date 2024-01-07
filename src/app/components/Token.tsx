@@ -51,13 +51,12 @@ function Token({ color, token, playerId, isMultiple }: TokenProps) {
 					const [homeCell] = homeCells[cellIndex]
 
 					if (diceNumber > homeCellsCount - cellIndex) {
-						// setDisabled(false)
-						// setTurn(getNextPlayer(turn))
 						return
 					}
 
 					if (cellIndex + diceNumber === homeCellsCount) {
-						removeToken(tokens, tokenId, turn)
+						// removeToken(tokens, tokenId, turn)
+						token.isFinish = true;
 					}
 
 					console.log(homeCellsCount, cellIndex, homeCellsCount - cellIndex);
@@ -88,7 +87,7 @@ function Token({ color, token, playerId, isMultiple }: TokenProps) {
 	}
 
 	return (
-		<div id={token.id} className={`${styles.zIndex} ${token.isHl ? `${styles.hl} ${styles.pointer}` : ""} ${isMultiple > 1 ? styles.positionToken : ""}`} onClick={move}>
+		<div id={token.id} className={`${token.isFinish && styles.hide} ${styles.zIndex} ${token.isHl ? `${styles.hl} ${styles.pointer}` : ""} ${isMultiple > 1 ? styles.positionToken : ""}`} onClick={move}>
 			<Image id={token.id} src={`/token-${color}.png`} width={token.isHl ? 40 : tokenSize} height={token.isHl ? 40 : tokenSize} className={styles.token} />
 		</div>
 	)

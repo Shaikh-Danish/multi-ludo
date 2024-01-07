@@ -5,6 +5,7 @@ export interface Token {
   isHl: boolean;
   tokens: Token;
   id: number;
+  isFinish: boolean;
 }
 
 export interface Tokens {

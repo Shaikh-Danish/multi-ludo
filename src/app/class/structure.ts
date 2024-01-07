@@ -6,6 +6,7 @@ const tokens: Token[] = [
     index: null,
     home: false,
     isHl: false,
+    isFinish: false,
     id: 1,
   },
   {
@@ -13,6 +14,7 @@ const tokens: Token[] = [
     index: null,
     home: false,
     isHl: false,
+    isFinish: false,
     id: 2,
   },
   {
@@ -20,6 +22,7 @@ const tokens: Token[] = [
     index: null,
     home: false,
     isHl: false,
+    isFinish: false,
     id: 3,
   },
   {
@@ -27,6 +30,7 @@ const tokens: Token[] = [
     index: null,
     home: false,
     isHl: false,
+    isFinish: false,
     id: 4,
   }
 ];

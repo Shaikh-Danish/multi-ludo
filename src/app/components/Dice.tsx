@@ -2,13 +2,14 @@ import React, { useState } from "react"
 
 import styles from "@/app/styles/Dice.module.css"
 import { getNextPlayer, unHighlightTokens } from "@/app/utils/util"
-import { useTurnContext, useTokenContext, useDiceDisabledContext, useDiceNumberContext } from "@/app/context"
+import { useTurnContext, useTokenContext, useDiceDisabledContext, useDiceNumberContext, useCellsContext } from "@/app/context"
 
 function Dice() {
 	const { disabled, setDisabled } = useDiceDisabledContext()
 	const { turn, setTurn } = useTurnContext()
 	const { tokens, setTokens } = useTokenContext()
 	const { diceNumber, setDiceNumber } = useDiceNumberContext()
+	const { cells } = useCellsContext()
 
 	const rollDice = (): void => {
 		const roll = Math.floor(Math.random() * 6) + 1;
@@ -19,7 +20,7 @@ function Dice() {
 
 		if (isAllInHouse) {
 			if (roll === 6) {
-				const hlTokens = highlightPlayerTokens(playerTokens.tokens, roll)
+				const hlTokens = highlightPlayerTokens(playerTokens.tokens, [], roll)
 
 				setDisabled(true)
 				setTokens({ ...tokens, [turn]: { color: playerTokens.color, pid: playerTokens.pid, tokens: hlTokens } })
@@ -29,7 +30,11 @@ function Dice() {
 				setTurn(getNextPlayer(turn))
 			}
 		} else {
-			const hlTokens = highlightPlayerTokens(playerTokens.tokens, roll)
+			const homeTokens = []
+			cells.find((cell, i) => {
+				if (cell.home === playerTokens.color) homeTokens.push([cell, i])
+			})
+			const hlTokens = highlightPlayerTokens(playerTokens.tokens, homeTokens, roll)
 
 			setDisabled(true)
 			setTokens({ ...tokens, [turn]: { color: playerTokens.color, pid: playerTokens.pid, tokens: hlTokens } })
@@ -47,10 +52,20 @@ function Dots() {
 	return <div className={styles.dot}></div>
 }
 
-function highlightPlayerTokens(tokens, diceNumber: number) {
-	return tokens.map(token => {
+function highlightPlayerTokens(tokens, homeTokens, diceNumber: number) {
 
-		if (!token.inHouse) {
+	return tokens.map(token => {
+		if (token.home) {
+			  const tokenIndex = homeTokens.findIndex(([, index]) => token.index === index)
+
+				if (diceNumber <= (homeTokens.length - (tokenIndex + 1))) {
+					return { ...token, isHl: true }
+				}
+				return token
+		}
+
+
+		if (!token.inHouse && !token.isFinish) {
 			return { ...token, isHl: true }
 		} else if (diceNumber === 6 && token.inHouse) {
 			return { ...token, isHl: true }

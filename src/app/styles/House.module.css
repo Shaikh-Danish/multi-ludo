@@ -100,3 +100,8 @@
   background-color: gray;
   z-index: 100;
 }
+
+.hide {
+  /* opacity: 0; */
+  display: none;
+}
