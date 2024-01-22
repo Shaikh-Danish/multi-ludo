@@ -1,4 +1,4 @@
-import { CellType, Token, Tokens, Player } from "@/app/types"
+import { CellType, Token, Tokens } from "@/app/types";
 
 const tokens: Token[] = [
   {
@@ -32,7 +32,7 @@ const tokens: Token[] = [
     isHl: false,
     isFinish: false,
     id: 4,
-  }
+  },
 ];
 
 export const cellsObj: CellType[] = [
@@ -99,7 +99,7 @@ export const cellsObj: CellType[] = [
   { start: "green", home: "green", row: 8, col: 12 },
   { start: "green", home: "green", row: 8, col: 11 },
   { start: "green", home: "green", row: 8, col: 10 },
-  { home: "green"  },
+  { home: "green" },
   { start: "blue", home: "blue", col: 8, row: 14 },
   { start: "blue", home: "blue", col: 8, row: 13 },
   { start: "blue", home: "blue", col: 8, row: 12 },
@@ -111,14 +111,14 @@ export const cellsObj: CellType[] = [
   { start: "yellow", home: "yellow", row: 8, col: 4 },
   { start: "yellow", home: "yellow", row: 8, col: 5 },
   { start: "yellow", home: "yellow", row: 8, col: 6 },
-  { home: "yellow"  }
+  { home: "yellow" },
 ];
 
 export const playerTokens: Tokens = {
   "p-1": {
     color: "yellow",
     pid: "p-1",
-    tokens,
+    tokens: tokens,
   },
   "p-2": {
     color: "red",
@@ -134,8 +134,8 @@ export const playerTokens: Tokens = {
     color: "blue",
     pid: "p-4",
     tokens,
-  }
-}
+  },
+};
 
 // export const players: Player[] = [
 //   {

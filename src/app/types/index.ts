@@ -1,7 +1,6 @@
-import { CellType } from "./cell.ts"
-import { Token, Tokens } from "./token.ts"
-import { Player } from "./player.ts"
+import { CellType } from "./cell"
+import { Token, Tokens } from "./token"
 
-export {
-	CellType, Token, Tokens, Player
+export type {
+	CellType, Token, Tokens, 
 }

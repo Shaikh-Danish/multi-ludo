@@ -3,7 +3,7 @@ export interface CellType {
   start?: string;
   col?: number;
   row?: number;
-  cells?: Cell[];
+  cells?: CellType[];
   entry?: string;
   tokens?: [Token];
   house?: boolean;

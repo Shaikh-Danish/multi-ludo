@@ -2,7 +2,7 @@ import { createContext, useContext } from "react"
 
 interface TurnContextProps {
   turn: string;
-  setTokens: React.Dispatch<React.SetStateAction<string>>;
+  setTurn: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const defaultTurnContext: TurnContextProps = {
@@ -10,7 +10,7 @@ const defaultTurnContext: TurnContextProps = {
   setTurn: () => {}
 };
 
-export const turnContext = createContext<defaultTurnContext>(defaultTurnContext)
+export const turnContext = createContext<TurnContextProps>(defaultTurnContext)
 
 export const useTurnContext = () => {
   const context = useContext(turnContext);

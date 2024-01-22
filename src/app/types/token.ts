@@ -3,12 +3,15 @@ export interface Token {
   index: number | null;
   home: boolean;
   isHl: boolean;
-  tokens: Token;
+  tokens?: Token[];
   id: number;
   isFinish: boolean;
 }
 
 export interface Tokens {
-  [key: string]: Token;
-  color: string;
+  [key: string]: {
+    tokens: Token[];
+    color: string;
+    pid: string;
+  };
 }

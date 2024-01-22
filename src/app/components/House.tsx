@@ -16,7 +16,7 @@ function House({pid, color, isTurn, tokens }: HouseProps) {
       className={`${styles[color]} ${styles.house} ${isTurn && styles.hlBorder}`}
     >
       <div className={`${styles.box} ${styles.grid} ${isTurn && styles.hlBorder}`}>
-        {tokens.map(token => <TokenHouse token={token} color={color} playerId={pid} />)}
+        {tokens.map(token => <TokenHouse key={`${token.pid}-${token.id}`} token={token} color={color} playerId={pid} />)}
       </div>
     </div>
   );

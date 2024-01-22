@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react"
 
-import { Tokens } from "@/app/types/token"
+import { Token } from "@/app/types/token"
 
 interface TokenContextProps {
   tokens: Token[];
