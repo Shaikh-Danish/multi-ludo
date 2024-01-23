@@ -2,15 +2,15 @@ import React, { createContext, useContext } from "react"
 
 interface diceNumberContextProps {
   diceNumber: number;
-  setDiceNumber: React.Dispatch<React.SetStateAction<boolean>>;
+  setDiceNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const defaultdiceNumberContext: diceNumberContextProps = {
+const defaultDiceNumberContext: diceNumberContextProps = {
   diceNumber: 0,
   setDiceNumber: () => {}
 };
 
-export const diceNumberContext = createContext<diceNumberContextProps>(defaultdiceNumberContext);
+export const diceNumberContext = createContext<diceNumberContextProps>(defaultDiceNumberContext);
 
 export const useDiceNumberContext = () => {
   const context = useContext(diceNumberContext);

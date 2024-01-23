@@ -5,7 +5,7 @@ import { getNextPlayer, unHighlightTokens } from "@/app/utils/util"
 import { useTurnContext, useTokenContext, useDiceDisabledContext, useDiceNumberContext, useCellsContext } from "@/app/context"
 
 function Dice() {
-	const { disabled, setDisabled } = useDiceDisabledContext()
+	const { diceDisabled, setDiceDisabled } = useDiceDisabledContext()
 	const { turn, setTurn } = useTurnContext()
 	const { tokens, setTokens } = useTokenContext()
 	const { diceNumber, setDiceNumber } = useDiceNumberContext()
@@ -18,31 +18,36 @@ function Dice() {
 		const playerTokens = tokens[turn]
 		const isAllInHouse = isAllTokensInHouse(playerTokens.tokens)
 
+		console.log(playerTokens.tokens)
+
 		if (isAllInHouse) {
 			if (roll === 6) {
 				const hlTokens = highlightPlayerTokens(playerTokens.tokens, [], roll)
 
-				setDisabled(true)
+				setDiceDisabled(true)
 				setTokens({ ...tokens, [turn]: { color: playerTokens.color, pid: playerTokens.pid, tokens: hlTokens } })
 			} else {
-				unHighlightTokens(tokens, roll)
-				setTokens(tokens)
+				// unHighlightTokens(tokens)
+				// setTokens(tokens)
 				setTurn(getNextPlayer(turn))
 			}
 		} else {
 			const homeTokens = []
+
 			cells.find((cell, i) => {
 				if (cell.home === playerTokens.color) homeTokens.push([cell, i])
 			})
+			
+			const canMove = canMoveTokens(playerTokes.tokens, homeTokens, roll)
 			const hlTokens = highlightPlayerTokens(playerTokens.tokens, homeTokens, roll)
 
-			setDisabled(true)
+			setDiceDisabled(true)
 			setTokens({ ...tokens, [turn]: { color: playerTokens.color, pid: playerTokens.pid, tokens: hlTokens } })
 		}
 	}
 
 	return (
-		<button className={styles.dice} onClick={rollDice} disabled={disabled}>
+		<button className={styles.dice} onClick={rollDice} disabled={diceDisabled}>
 			{Array.from({ length: diceNumber }, () => <Dots />)}
     </button>
 	)
@@ -52,8 +57,13 @@ function Dots() {
 	return <div className={styles.dot}></div>
 }
 
-function highlightPlayerTokens(tokens, homeTokens, diceNumber: number) {
+function canMoveTokens(tokens, homeTokens, diceNumber) {
+	tokens.forEach(token => {
+		if (token.home) 
+	})
+}
 
+function highlightPlayerTokens(tokens, homeTokens, diceNumber: number) {
 	return tokens.map(token => {
 		if (token.home) {
 			  const tokenIndex = homeTokens.findIndex(([, index]) => token.index === index)
@@ -61,13 +71,15 @@ function highlightPlayerTokens(tokens, homeTokens, diceNumber: number) {
 				if (diceNumber <= (homeTokens.length - (tokenIndex + 1))) {
 					return { ...token, isHl: true }
 				}
+
 				return token
 		}
 
-
 		if (!token.inHouse && !token.isFinish) {
 			return { ...token, isHl: true }
-		} else if (diceNumber === 6 && token.inHouse) {
+		} 
+		
+		if (diceNumber === 6 && token.inHouse) {
 			return { ...token, isHl: true }
 		}
 

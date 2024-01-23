@@ -5,12 +5,12 @@ interface diceDisabledContextProps {
   setDiceDisabled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const defaultdisabledContext: diceDisabledContextProps = {
+const defaultDisabledContext: diceDisabledContextProps = {
   diceDisabled: false,
   setDiceDisabled: () => {}
 };
 
-export const diceDisabledContext = createContext<diceDisabledContextProps>(defaultdisabledContext);
+export const diceDisabledContext = createContext<diceDisabledContextProps>(defaultDisabledContext);
 
 export const useDiceDisabledContext = () => {
   const context = useContext(diceDisabledContext);

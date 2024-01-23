@@ -16,7 +16,7 @@ function Token({ color, token, playerId, isMultiple }: TokenProps) {
 	const { turn, setTurn } = useTurnContext()
 	const { cells } = useCellsContext()
 	const { tokens, setTokens } = useTokenContext()
-	const { disabled, setDisabled } = useDiceDisabledContext()
+	const { setDiceDisabled } = useDiceDisabledContext()
 	const { diceNumber } = useDiceNumberContext()
 
 	const tokenSize = isMultiple > 1 ? 28 : 36
@@ -38,7 +38,7 @@ function Token({ color, token, playerId, isMultiple }: TokenProps) {
 				removeTokenFromHouse(tokens, token.id, playerId)
 
 				setTokens(tokens)
-				setDisabled(false)
+				setDiceDisabled(false)
 			} else {
 				if (token.home) {
 					const homeCells = []
@@ -55,19 +55,19 @@ function Token({ color, token, playerId, isMultiple }: TokenProps) {
 					}
 
 					if (cellIndex + diceNumber === homeCellsCount) {
-						// removeToken(tokens, tokenId, turn)
 						token.isFinish = true;
 					}
-
-					console.log(homeCellsCount, cellIndex, homeCellsCount - cellIndex);
 
 					token.index += diceNumber
 
 					unHighlightTokens(tokens)
 					setTokens(tokens)
-					setDisabled(false)
+					setDiceDisabled(false)
 
-					setTurn(getNextPlayer(turn))
+					if (!token.isFinish) {
+						setTurn(getNextPlayer(turn))
+					}
+
 				} else {
 					const tokenIndex: number = moveToken(tokens, turn, cells,  diceNumber, tokenId)
 					const cell = cells[tokenIndex]
@@ -76,7 +76,7 @@ function Token({ color, token, playerId, isMultiple }: TokenProps) {
 					unHighlightTokens(tokens)
 
 					setTokens(tokens)
-					setDisabled(false)
+					setDiceDisabled(false)
 
 					if (diceNumber !== 6 && !removedToken) {
 						setTurn(getNextPlayer(turn))
@@ -88,7 +88,7 @@ function Token({ color, token, playerId, isMultiple }: TokenProps) {
 
 	return (
 		<div id={token.id} className={`${token.isFinish && styles.hide} ${styles.zIndex} ${token.isHl ? `${styles.hl} ${styles.pointer}` : ""} ${isMultiple > 1 ? styles.positionToken : ""}`} onClick={move}>
-			<Image id={token.id} src={`/token-${color}.png`} width={token.isHl ? 40 : tokenSize} height={token.isHl ? 40 : tokenSize} className={styles.token} />
+			<Image id={token.id} alt={`/token-${color}`} src={`/token-${color}.png`} width={token.isHl ? 40 : tokenSize} height={token.isHl ? 40 : tokenSize} className={styles.token} />
 		</div>
 	)
 }
@@ -132,10 +132,9 @@ function otherTokensOnCell(tokens, cell, playerId: string, cellIndex: number): b
 
 	if (cell.safe) return onCell;
 
-	Object.entries(tokens).forEach(([,{ pid, color, tokens }]) => {
+	Object.entries(tokens).forEach(([,{ pid, tokens }]) => {
 		tokens.forEach(token => {
 			if (token.index == cellIndex && playerId != pid) {
-
 				onCell = true
 				token.inHouse = true;
 				token.index = null;
@@ -169,9 +168,6 @@ function findHomeCell(cells, token, color: string, diceNumber: number): any {
 			if (cell.home === color) homeCells.push([cell, index])
 		})
 
-		console.log(homeCells);
-
-		console.log(diceNumber);
 
 		return [...homeCells[diceNumber - 1]]
 	}
